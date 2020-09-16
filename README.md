@@ -75,7 +75,8 @@ You will have to type a password.
 Make lfs the owner of the filesystem:
 
 ```
-chown -v lfs $LFS/{usr,lib,var,etc,bin,sbin,lib64,tools,sources}
+chown -R lfs:lfs $LFS/*
+chown lfs:lfs $LFS
 ```
 
 Login as the lfs user:
@@ -110,10 +111,15 @@ EOF
 source ~/.bash_profile
 ```
 
+Copy all the scripts from this repository to your $LFS directory:
+
+```
+cp /<location_of_the_scripts>/*.sh $LFS
+```
+
 Now, run the lfs-cross.sh script, which will build the cross-toolchain and cross compiling temporary tools from chapters 5 and 6. The build took 30 min on my machine:
 
 ```
 cd $LFS
-cp /<location_of_the_scripts>/lfs-cross.sh .
 sh lfs-cross.sh | tee lfs-cross.log
 ```
