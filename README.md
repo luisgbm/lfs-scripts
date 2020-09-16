@@ -115,5 +115,5 @@ Now, run the lfs-cross.sh script, which will build the cross-toolchain and cross
 ```
 cd $LFS
 cp /<location_of_the_scripts>/lfs-cross.sh .
-sh lfs-cross.sh
+sh lfs-cross.sh | tee lfs-cross.log
 ```
