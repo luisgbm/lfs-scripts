@@ -46,9 +46,13 @@ Source the file to use the variable:
 source .bashrc
 ```
 
-Download all the packages and extract them to /mnt/lfs/sources. Set the sticky bit:
+Download all the packages and extract them to /mnt/lfs/sources.
 
 ```
+cd /mnt/lfs
+cp /<location_of_the_package>/lfs-packages-10.0.tar .
+tar xf lfs-packages-10.0.tar
+mv 10.0 sources
 chmod -v a+wt $LFS/sources
 ```
 
