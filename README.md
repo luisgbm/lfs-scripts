@@ -119,7 +119,7 @@ cp /<location_of_the_scripts>/*.sh $LFS
 Now, run the lfs-cross.sh script, which will build the cross-toolchain and cross compiling temporary tools from chapters 5 and 6. The build took approximately 30 minutes on my machine:
 
 ``` 
-sh $LFS/lfs-cross.sh | tee lfs-cross.log
+sh $LFS/lfs-cross.sh | tee $LFS/lfs-cross.log
 ```
 
 Return to being root:
