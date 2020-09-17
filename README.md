@@ -127,7 +127,7 @@ Return to being root:
 exit
 ```
 
-:point_right: Run commands below as lfs.
+:point_right: Run commands below as root.
 
 Make root own the entire filesystem again:
 
