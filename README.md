@@ -117,9 +117,8 @@ cp /<location_of_the_scripts>/*.sh $LFS
 
 Now, run the lfs-cross.sh script, which will build the cross-toolchain and cross compiling temporary tools from chapters 5 and 6. The build took approximately 30 minutes on my machine:
 
-```
-cd $LFS
-sh lfs-cross.sh | tee lfs-cross.log
+``` 
+sh $LFS/lfs-cross.sh | tee lfs-cross.log
 ```
 
 Return to being root:
@@ -221,4 +220,10 @@ chgrp -v utmp /var/log/lastlog
 chmod -v 664  /var/log/lastlog
 chmod -v 600  /var/log/btmp
 exec /bin/bash --login +h
+```
+
+Run the lfs-chroot.sh script, which will build additional temporary tools:
+
+``` 
+sh $LFS/lfs-chroot.sh | tee lfs-chroot.log
 ```
