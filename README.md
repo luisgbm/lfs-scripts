@@ -227,3 +227,16 @@ Run the lfs-chroot.sh script, which will build additional temporary tools:
 ``` 
 sh /lfs-chroot.sh | tee /lfs-chroot.log
 ```
+
+Cleanup before the final build phase:
+
+```
+find /usr/{lib,libexec} -name \*.la -delete
+rm -rf /usr/share/{info,man,doc}/*
+```
+
+For the final build phase, run the lfs-system.sh script:
+
+``` 
+sh /lfs-system.sh | tee /lfs-system.log
+```
