@@ -225,5 +225,5 @@ exec /bin/bash --login +h
 Run the lfs-chroot.sh script, which will build additional temporary tools:
 
 ``` 
-sh $LFS/lfs-chroot.sh | tee lfs-chroot.log
+sh /lfs-chroot.sh | tee /lfs-chroot.log
 ```
