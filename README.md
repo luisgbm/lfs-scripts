@@ -25,7 +25,7 @@ fdisk /dev/sdb
 Use the following basic options:
 
 n- new partition
-<Enter> for all default values
+Accept the default values
 w- write changes
 
 Create a filesystem, a mount point, and mount it:
