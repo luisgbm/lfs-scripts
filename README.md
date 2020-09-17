@@ -44,7 +44,7 @@ Source the file:
 source .bashrc
 ```
 
-Download all the packages and extract them to $LFS/sources.
+Download all the packages and extract them to $LFS/sources. The tcl package must be renamed in order to work with the scripts that will follow.
 
 ```
 cd $LFS
@@ -52,6 +52,7 @@ cp /<location_of_the_package>/lfs-packages-10.0.tar .
 tar xf lfs-packages-10.0.tar
 mv 10.0 sources
 chmod -v a+wt $LFS/sources
+mv $LFS/sources/tcl8.6.10-src.tar.gz $LFS/sources/tcl8.6.10.tar.gz
 ```
 
 Create the basic filesystem for LFS:
