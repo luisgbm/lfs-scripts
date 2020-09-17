@@ -3,17 +3,19 @@ Instructions and scripts to build LFS (Linux From Scratch) 10.0 as simply as pos
 
 # Foreword
 
-First, this guide does not replace reading the whole LFS book. I highly recommend that you read it, at least once, and then go to the automation scripts provided here.
+First, this guide does not replace reading the whole LFS book. I highly recommend that you read it at least once. Only then you should use the automation scripts provided here.
 
-This build will be done inside a virtual machine, for that I'll be using Oracle VirtualBox, but you can use the tool you prefer. I'm running an Arch Linux VM, feel free to use your GNU/Linux distro of preference. Just be sure to install the development tools (base-devel package on Arch).
+This build will be accomplished inside a virtual machine. I'll be using Oracle VirtualBox, but you can use the tool of your personal preference. I'm running an Arch Linux VM, feel free to use your GNU/Linux distribution of choice. Just be sure to install the development tools available (base-devel package on Arch).
 
-My VM has two virtual hard disks: one for the host (Arch Linux itself) and another for building LFS. You could also use a single hard disk with two partitions, that's up to personal preference. I've decided to use two separate hard disks so I can completely isolate LFS from the host after the build. At the end, you'll be able to create a separate VM and boot it.
+My VM has two virtual hard disks: one for the host (Arch Linux itself) and another for building LFS. You could also use a single hard disk with two partitions, that's up to personal taste. I've decided to use two separate hard disks so I can completely isolate LFS from the host after the build. At the end, you'll be able to create a separate VM and boot it directly.
 
-The packages needed to build LFS were obtained from ftp://ftp.lfs-matrix.net/pub/lfs/lfs-packages/lfs-packages-10.0.tar (423 MB), other mirrors are available at http://linuxfromscratch.org/lfs/download.html
+The packages needed to build LFS were downloaded from [here](ftp://ftp.lfs-matrix.net/pub/lfs/lfs-packages/lfs-packages-10.0.tar) (423 MB), other mirrors are available [here](http://linuxfromscratch.org/lfs/download.html)
 
 # Build instructions
 
-Create a partition and a filesystem in the virtual hard disk (/dev/sdb). Run commands as root:
+:point_right: Run commands below as root.
+
+Create a partition and a filesystem in the virtual hard disk (/dev/sdb):
 
 ```
 mkdir /mnt/lfs
@@ -26,7 +28,7 @@ n- new partition
 <Enter> for all default values
 w- write changes
 
-Create a filysystem, a mount point, and mount it:
+Create a filesystem, a mount point, and mount it:
 
 ```
 mkfs.ext4 /dev/sdb1
@@ -34,19 +36,19 @@ mkdir /mnt/lfs
 mount /dev/sdb1 /mnt/lfs
 ```
 
-Include the following command to root's .bashrc:
+Add the following line to root's .bashrc:
 
 ```
 export LFS=/mnt/lfs
 ```
 
-Source the file to use the variable:
+Source the file:
 
 ```
 source .bashrc
 ```
 
-Download all the packages and extract them to /mnt/lfs/sources.
+Download all the packages and extract them to $LFS/sources.
 
 ```
 cd $LFS
@@ -56,13 +58,13 @@ mv 10.0 sources
 chmod -v a+wt $LFS/sources
 ```
 
-Create the basic filesystem:
+Create the basic filesystem for LFS:
 
 ```
 mkdir -pv $LFS/{bin,etc,lib,sbin,usr,var,lib64,tools}
 ```
 
-Create the lfs user, used during the initial build process:
+Create the lfs user, used during the initial build process (you will have to type a password):
 
 ```
 groupadd lfs
@@ -70,9 +72,7 @@ useradd -s /bin/bash -g lfs -m -k /dev/null lfs
 passwd lfs
 ```
 
-You will have to type a password.
-
-Make lfs the owner of the filesystem:
+Make lfs own the entire filesystem:
 
 ```
 chown -R lfs:lfs $LFS/*
@@ -108,16 +108,16 @@ PATH=$LFS/tools/bin:$PATH
 export LFS LC_ALL LFS_TGT PATH
 EOF
 
-source ~/.bash_profile
+source ~/.bashrc
 ```
 
-Copy all the scripts from this repository to your $LFS directory:
+Copy all the shell scripts from this repository to your $LFS directory:
 
 ```
 cp /<location_of_the_scripts>/*.sh $LFS
 ```
 
-Now, run the lfs-cross.sh script, which will build the cross-toolchain and cross compiling temporary tools from chapters 5 and 6. The build took 30 min on my machine:
+Now, run the lfs-cross.sh script, which will build the cross-toolchain and cross compiling temporary tools from chapters 5 and 6. The build took approximately 30 minutes on my machine:
 
 ```
 cd $LFS
