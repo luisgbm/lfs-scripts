@@ -22,11 +22,7 @@ mkdir /mnt/lfs
 fdisk /dev/sdb
 ```
 
-Use the following basic options:
-
-n- new partition
-Accept the default values
-w- write changes
+Use the following basic options: n- new partition, accept the default values, w- write changes
 
 Create a filesystem, a mount point, and mount it:
 
