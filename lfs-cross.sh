@@ -16,7 +16,7 @@ begin() {
 }
 
 finish() {
-	cd /sources
+	cd $LFS/sources
 	rm -rf $package_name
 }
 
