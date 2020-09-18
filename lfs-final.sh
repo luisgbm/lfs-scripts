@@ -195,8 +195,10 @@ devtmpfs       /dev         devtmpfs mode=0755,nosuid    0     0
 # End /etc/fstab
 EOF
 
+cd /sources
+
 # 10.3. Linux-5.8.3
-begin linux 5.8.3.tar.xz
+begin linux-5.8.3 tar.xz
 make mrproper
 make defconfig
 make
