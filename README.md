@@ -241,3 +241,26 @@ For the final build phase, run the lfs-system.sh script:
 ``` 
 sh /lfs-system.sh | tee /lfs-system.log
 ```
+
+You must now set a password for the root user (you will have to type a password):
+
+```
+passwd root
+```
+
+Logout from the chroot environment and re-enter it with updated configuration:
+
+```
+logout
+chroot "$LFS" /usr/bin/env -i          \
+    HOME=/root TERM="$TERM"            \
+    PS1='(lfs chroot) \u:\w\$ '        \
+    PATH=/bin:/usr/bin:/sbin:/usr/sbin \
+    /bin/bash --login
+```
+
+Run the final script to configure the rest of the system:
+
+```
+sh /lfs-final.sh | tee /lfs-final.log
+```
