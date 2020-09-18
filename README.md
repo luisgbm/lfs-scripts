@@ -264,3 +264,7 @@ Run the final script to configure the rest of the system:
 ```
 sh /lfs-final.sh | tee /lfs-final.log
 ```
+
+# The end
+
+You can now create a new VM using the virtual hard disk with the LFS build. It will be bootable and fully functional. Enjoy!
