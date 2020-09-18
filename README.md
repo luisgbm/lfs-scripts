@@ -55,6 +55,12 @@ chmod -v a+wt $LFS/sources
 mv $LFS/sources/tcl8.6.10-src.tar.gz $LFS/sources/tcl8.6.10.tar.gz
 ```
 
+Copy all the shell scripts from this repository to your $LFS directory:
+
+```
+cp /<location_of_the_scripts>/*.sh $LFS
+```
+
 Create the basic filesystem for LFS:
 
 ```
@@ -110,13 +116,7 @@ EOF
 source ~/.bashrc
 ```
 
-Copy all the shell scripts from this repository to your $LFS directory:
-
-```
-cp /<location_of_the_scripts>/*.sh $LFS
-```
-
-Now, run the lfs-cross.sh script, which will build the cross-toolchain and cross compiling temporary tools from chapters 5 and 6:
+Run the lfs-cross.sh script, which will build the cross-toolchain and cross compiling temporary tools from chapters 5 and 6:
 
 ``` 
 sh $LFS/lfs-cross.sh | tee $LFS/lfs-cross.log
