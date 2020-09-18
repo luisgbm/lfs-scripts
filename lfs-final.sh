@@ -235,3 +235,21 @@ menuentry "GNU/Linux, Linux 5.8.3-lfs-10.0" {
         linux   /boot/vmlinuz-5.8.3-lfs-10.0 root=/dev/sda1 ro
 }
 EOF
+
+# 11.1. The End
+echo 10.0 > /etc/lfs-release
+cat > /etc/lsb-release << "EOF"
+DISTRIB_ID="Linux From Scratch"
+DISTRIB_RELEASE="10.0"
+DISTRIB_CODENAME="Linux From Scratch"
+DISTRIB_DESCRIPTION="Linux From Scratch"
+EOF
+cat > /etc/os-release << "EOF"
+NAME="Linux From Scratch"
+VERSION="10.0"
+ID=lfs
+PRETTY_NAME="Linux From Scratch 10.0"
+VERSION_CODENAME="Linux From Scratch"
+EOF
+
+echo "[lfs-scripts] The end"
