@@ -22,7 +22,6 @@ The packages needed to build LFS were downloaded from [here](http://ftp.lfs-matr
 Create a partition and a filesystem in the virtual hard disk (/dev/sdb):
 
 ```
-mkdir /mnt/lfs
 fdisk /dev/sdb
 ```
 
