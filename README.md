@@ -1,9 +1,5 @@
 # lfs-scripts :penguin:
-Instructions and scripts to build LFS (Linux From Scratch), version 10.0, as simply as possible (I know, not that simple, but anyway).
-
-![Output of uname -a](https://github.com/luisgbm/lfs-scripts/blob/master/img/uname.png?raw=true)
-
-![vim :smile](https://github.com/luisgbm/lfs-scripts/blob/master/img/vim-smile.png?raw=true)
+Instructions and scripts to build LFS (Linux From Scratch), version 10.1, as simply as possible (I know, not that simple, but anyway).
 
 # Foreword
 
