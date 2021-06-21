@@ -5,7 +5,7 @@ Instructions and scripts to build LFS (Linux From Scratch), version 10.1, as sim
 
 First, this guide does not replace reading the whole LFS book. I highly recommend that you read it at least once. Only then you should use the automation scripts provided here.
 
-This build will be accomplished inside a virtual machine. I'll be using Oracle VirtualBox, but you can use the tool of your personal preference. I'm running an Arch Linux VM, feel free to use your GNU/Linux distribution of choice. Just be sure to install the development tools available (base-devel package on Arch).
+This build will be accomplished inside a Fedora release 34 machine.
 
 My VM has two virtual hard disks: one for the host (Arch Linux itself) and another for building LFS. You could also use a single hard disk with two partitions, that's also up to personal taste. I've decided to use two separate hard disks so I can completely isolate LFS from the host after the build. At the end, you'll be able to create a separate VM and boot from it directly.
 

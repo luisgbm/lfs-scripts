@@ -1,5 +1,5 @@
 # lfs-scripts :penguin:
-Instructions and scripts to build LFS (Linux From Scratch), version 10.1, as simply as possible (I know, not that simple, but anyway).
+Instructions and scripts to build LFS (Linux From Scratch), version 10.1. I'm performing the build on a Fedora 34 Workstation.
 
 # Foreword
 
