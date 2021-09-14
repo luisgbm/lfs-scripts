@@ -1,4 +1,4 @@
-[lfs-scripts] Starting build of lfs-bootscripts-20200818 at Tue Feb  2 11:55:48 -03 2021
+[lfs-scripts] Starting build of lfs-bootscripts-20210608 at Tue Sep 14 13:22:06 -03 2021
 install -d -m 755  /etc/rc.d/rc0.d
 install -d -m 755  /etc/rc.d/rc1.d
 install -d -m 755  /etc/rc.d/rc2.d
@@ -88,8 +88,8 @@ ln -sf ../init.d/swap        /etc/rc.d/rc6.d/S65swap
 ln -sf ../init.d/mountfs     /etc/rc.d/rc6.d/S70mountfs
 ln -sf ../init.d/localnet    /etc/rc.d/rc6.d/S90localnet
 ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
-[lfs-scripts] Finishing build of lfs-bootscripts-20200818 at Tue Feb  2 11:55:48 -03 2021
-[lfs-scripts] Starting build of linux-5.8.3 at Tue Feb  2 11:55:48 -03 2021
+[lfs-scripts] Finishing build of lfs-bootscripts-20210608 at Tue Sep 14 13:22:07 -03 2021
+[lfs-scripts] Starting build of linux-5.13.12 at Tue Sep 14 13:22:07 -03 2021
   HOSTCC  scripts/basic/fixdep
   HOSTCC  scripts/kconfig/conf.o
   HOSTCC  scripts/kconfig/confdata.o
@@ -97,6 +97,7 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   LEX     scripts/kconfig/lexer.lex.c
   YACC    scripts/kconfig/parser.tab.[ch]
   HOSTCC  scripts/kconfig/lexer.lex.o
+  HOSTCC  scripts/kconfig/menu.o
   HOSTCC  scripts/kconfig/parser.tab.o
   HOSTCC  scripts/kconfig/preprocess.o
   HOSTCC  scripts/kconfig/symbol.o
@@ -106,13 +107,13 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
 #
 # configuration written to .config
 #
+  SYSHDR  arch/x86/include/generated/uapi/asm/unistd_32.h
+  SYSHDR  arch/x86/include/generated/uapi/asm/unistd_64.h
+  SYSHDR  arch/x86/include/generated/uapi/asm/unistd_x32.h
   SYSTBL  arch/x86/include/generated/asm/syscalls_32.h
   SYSHDR  arch/x86/include/generated/asm/unistd_32_ia32.h
   SYSHDR  arch/x86/include/generated/asm/unistd_64_x32.h
   SYSTBL  arch/x86/include/generated/asm/syscalls_64.h
-  SYSHDR  arch/x86/include/generated/uapi/asm/unistd_32.h
-  SYSHDR  arch/x86/include/generated/uapi/asm/unistd_64.h
-  SYSHDR  arch/x86/include/generated/uapi/asm/unistd_x32.h
   HOSTCC  arch/x86/tools/relocs_32.o
   HOSTCC  arch/x86/tools/relocs_64.o
   HOSTCC  arch/x86/tools/relocs_common.o
@@ -140,10 +141,12 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   WRAP    arch/x86/include/generated/asm/early_ioremap.h
   WRAP    arch/x86/include/generated/asm/export.h
   WRAP    arch/x86/include/generated/asm/mcs_spinlock.h
-  WRAP    arch/x86/include/generated/asm/dma-contiguous.h
   WRAP    arch/x86/include/generated/asm/irq_regs.h
-  WRAP    arch/x86/include/generated/asm/mm-arch-hooks.h
+  WRAP    arch/x86/include/generated/asm/kmap_size.h
+  WRAP    arch/x86/include/generated/asm/local64.h
   WRAP    arch/x86/include/generated/asm/mmiowb.h
+  WRAP    arch/x86/include/generated/asm/module.lds.h
+  WRAP    arch/x86/include/generated/asm/rwonce.h
   UPD     include/config/kernel.release
   UPD     include/generated/uapi/linux/version.h
   UPD     include/generated/utsrelease.h
@@ -163,45 +166,45 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   UPD     include/generated/asm-offsets.h
   CALL    scripts/checksyscalls.sh
   CALL    scripts/atomic/check-atomics.sh
-  DESCEND  objtool
-  HOSTCC   /sources/linux-5.8.3/tools/objtool/fixdep.o
-  HOSTLD   /sources/linux-5.8.3/tools/objtool/fixdep-in.o
-  LINK     /sources/linux-5.8.3/tools/objtool/fixdep
-  CC       /sources/linux-5.8.3/tools/objtool/exec-cmd.o
-  CC       /sources/linux-5.8.3/tools/objtool/help.o
-  CC       /sources/linux-5.8.3/tools/objtool/pager.o
-  CC       /sources/linux-5.8.3/tools/objtool/parse-options.o
-  CC       /sources/linux-5.8.3/tools/objtool/run-command.o
-  CC       /sources/linux-5.8.3/tools/objtool/sigchain.o
-  CC       /sources/linux-5.8.3/tools/objtool/subcmd-config.o
-  LD       /sources/linux-5.8.3/tools/objtool/libsubcmd-in.o
-  AR       /sources/linux-5.8.3/tools/objtool/libsubcmd.a
-  MKDIR    /sources/linux-5.8.3/tools/objtool/arch/x86/lib/
-  GEN      /sources/linux-5.8.3/tools/objtool/arch/x86/lib/inat-tables.c
-  CC       /sources/linux-5.8.3/tools/objtool/arch/x86/decode.o
-  LD       /sources/linux-5.8.3/tools/objtool/arch/x86/objtool-in.o
-  CC       /sources/linux-5.8.3/tools/objtool/weak.o
-  CC       /sources/linux-5.8.3/tools/objtool/check.o
-  CC       /sources/linux-5.8.3/tools/objtool/special.o
-  CC       /sources/linux-5.8.3/tools/objtool/orc_gen.o
-  CC       /sources/linux-5.8.3/tools/objtool/orc_dump.o
-  CC       /sources/linux-5.8.3/tools/objtool/builtin-check.o
-  CC       /sources/linux-5.8.3/tools/objtool/builtin-orc.o
-  CC       /sources/linux-5.8.3/tools/objtool/elf.o
-  CC       /sources/linux-5.8.3/tools/objtool/objtool.o
-  CC       /sources/linux-5.8.3/tools/objtool/libstring.o
-  CC       /sources/linux-5.8.3/tools/objtool/libctype.o
-  CC       /sources/linux-5.8.3/tools/objtool/str_error_r.o
-  CC       /sources/linux-5.8.3/tools/objtool/librbtree.o
-  LD       /sources/linux-5.8.3/tools/objtool/objtool-in.o
-  LINK     /sources/linux-5.8.3/tools/objtool/objtool
+  DESCEND objtool
+  HOSTCC  /sources/linux-5.13.12/tools/objtool/fixdep.o
+  HOSTLD  /sources/linux-5.13.12/tools/objtool/fixdep-in.o
+  LINK    /sources/linux-5.13.12/tools/objtool/fixdep
+  CC      /sources/linux-5.13.12/tools/objtool/exec-cmd.o
+  CC      /sources/linux-5.13.12/tools/objtool/help.o
+  CC      /sources/linux-5.13.12/tools/objtool/pager.o
+  CC      /sources/linux-5.13.12/tools/objtool/parse-options.o
+  CC      /sources/linux-5.13.12/tools/objtool/run-command.o
+  CC      /sources/linux-5.13.12/tools/objtool/sigchain.o
+  CC      /sources/linux-5.13.12/tools/objtool/subcmd-config.o
+  LD      /sources/linux-5.13.12/tools/objtool/libsubcmd-in.o
+  AR      /sources/linux-5.13.12/tools/objtool/libsubcmd.a
+  CC      /sources/linux-5.13.12/tools/objtool/arch/x86/special.o
+  MKDIR   /sources/linux-5.13.12/tools/objtool/arch/x86/lib/
+  GEN     /sources/linux-5.13.12/tools/objtool/arch/x86/lib/inat-tables.c
+  CC      /sources/linux-5.13.12/tools/objtool/arch/x86/decode.o
+  LD      /sources/linux-5.13.12/tools/objtool/arch/x86/objtool-in.o
+  CC      /sources/linux-5.13.12/tools/objtool/weak.o
+  CC      /sources/linux-5.13.12/tools/objtool/check.o
+  CC      /sources/linux-5.13.12/tools/objtool/special.o
+  CC      /sources/linux-5.13.12/tools/objtool/orc_gen.o
+  CC      /sources/linux-5.13.12/tools/objtool/orc_dump.o
+  CC      /sources/linux-5.13.12/tools/objtool/builtin-check.o
+  CC      /sources/linux-5.13.12/tools/objtool/builtin-orc.o
+  CC      /sources/linux-5.13.12/tools/objtool/elf.o
+  CC      /sources/linux-5.13.12/tools/objtool/objtool.o
+  CC      /sources/linux-5.13.12/tools/objtool/libstring.o
+  CC      /sources/linux-5.13.12/tools/objtool/libctype.o
+  CC      /sources/linux-5.13.12/tools/objtool/str_error_r.o
+  CC      /sources/linux-5.13.12/tools/objtool/librbtree.o
+  LD      /sources/linux-5.13.12/tools/objtool/objtool-in.o
+  LINK    /sources/linux-5.13.12/tools/objtool/objtool
   CC      init/main.o
   CHK     include/generated/compile.h
   UPD     include/generated/compile.h
   CC      init/version.o
   CC      init/do_mounts.o
   CC      init/do_mounts_initrd.o
-  CC      init/do_mounts_md.o
   CC      init/initramfs.o
   CC      init/calibrate.o
   CC      init/init_task.o
@@ -212,6 +215,7 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   AS      usr/initramfs_data.o
   AR      usr/built-in.a
   CC      arch/x86/entry/vdso/vma.o
+  CC      arch/x86/entry/vdso/extable.o
   CC      arch/x86/entry/vdso/vdso32-setup.o
   LDS     arch/x86/entry/vdso/vdso.lds
   AS      arch/x86/entry/vdso/vdso-note.o
@@ -259,6 +263,7 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      arch/x86/events/intel/uncore_nhmex.o
   CC      arch/x86/events/intel/uncore_snb.o
   CC      arch/x86/events/intel/uncore_snbep.o
+  CC      arch/x86/events/intel/uncore_discovery.o
   CC      arch/x86/events/intel/cstate.o
   AR      arch/x86/events/intel/built-in.a
   CC      arch/x86/events/zhaoxin/core.o
@@ -302,7 +307,6 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      arch/x86/kernel/cpu/mce/intel.o
   CC      arch/x86/kernel/cpu/mce/amd.o
   CC      arch/x86/kernel/cpu/mce/threshold.o
-  CC      arch/x86/kernel/cpu/mce/therm_throt.o
   AR      arch/x86/kernel/cpu/mce/built-in.a
   CC      arch/x86/kernel/cpu/mtrr/mtrr.o
   CC      arch/x86/kernel/cpu/mtrr/if.o
@@ -403,6 +407,7 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      arch/x86/kernel/pci-iommu_table.o
   CC      arch/x86/kernel/resource.o
   AS      arch/x86/kernel/irqflags.o
+  CC      arch/x86/kernel/static_call.o
   CC      arch/x86/kernel/process.o
   CC      arch/x86/kernel/ptrace.o
   CC      arch/x86/kernel/tls.o
@@ -481,7 +486,6 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   AS      arch/x86/platform/efi/efi_thunk_64.o
   AR      arch/x86/platform/efi/built-in.a
   AR      arch/x86/platform/geode/built-in.a
-  AR      arch/x86/platform/goldfish/built-in.a
   AR      arch/x86/platform/iris/built-in.a
   CC      arch/x86/platform/intel/iosf_mbi.o
   AR      arch/x86/platform/intel/built-in.a
@@ -489,7 +493,6 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   AR      arch/x86/platform/intel-quark/built-in.a
   AR      arch/x86/platform/olpc/built-in.a
   AR      arch/x86/platform/scx200/built-in.a
-  AR      arch/x86/platform/sfi/built-in.a
   AR      arch/x86/platform/ts5500/built-in.a
   AR      arch/x86/platform/uv/built-in.a
   AR      arch/x86/platform/built-in.a
@@ -542,6 +545,7 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   AR      kernel/power/built-in.a
   CC      kernel/printk/printk.o
   CC      kernel/printk/printk_safe.o
+  CC      kernel/printk/printk_ringbuffer.o
   AR      kernel/printk/built-in.a
   CC      kernel/irq/irqdesc.o
   CC      kernel/irq/handle.o
@@ -570,9 +574,13 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   AR      kernel/livepatch/built-in.a
   CC      kernel/dma/mapping.o
   CC      kernel/dma/direct.o
+  CC      kernel/dma/ops_helpers.o
   CC      kernel/dma/dummy.o
   CC      kernel/dma/swiotlb.o
   AR      kernel/dma/built-in.a
+  CC      kernel/entry/common.o
+  CC      kernel/entry/syscall_user_dispatch.o
+  AR      kernel/entry/built-in.a
   CC      kernel/time/time.o
   CC      kernel/time/timer.o
   CC      kernel/time/hrtimer.o
@@ -622,6 +630,7 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      kernel/trace/trace_events_filter.o
   CC      kernel/trace/trace_events_trigger.o
   CC      kernel/trace/trace_kprobe.o
+  CC      kernel/trace/error_report-traces.o
   CC      kernel/trace/power-traces.o
   CC      kernel/trace/rpm-traces.o
   CC      kernel/trace/trace_dynevent.o
@@ -644,7 +653,6 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      kernel/softirq.o
   CC      kernel/resource.o
   CC      kernel/sysctl.o
-  CC      kernel/sysctl_binary.o
   CC      kernel/capability.o
   CC      kernel/ptrace.o
   CC      kernel/user.o
@@ -667,8 +675,10 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      kernel/range.o
   CC      kernel/smpboot.o
   CC      kernel/ucount.o
+  CC      kernel/regset.o
   CC      kernel/kmod.o
   CC      kernel/groups.o
+  CC      kernel/kcmp.o
   CC      kernel/freezer.o
   CC      kernel/profile.o
   CC      kernel/stacktrace.o
@@ -700,8 +710,8 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      kernel/taskstats.o
   CC      kernel/tsacct.o
   CC      kernel/tracepoint.o
-  CC      kernel/elfcore.o
   CC      kernel/irq_work.o
+  CC      kernel/static_call.o
   CC      kernel/crash_dump.o
   CC      kernel/jump_label.o
   CC      kernel/iomem.o
@@ -710,6 +720,7 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      certs/system_keyring.o
   EXTRACT_CERTS   
   AS      certs/system_certificates.o
+  CC      certs/common.o
   AR      certs/built-in.a
   CC      mm/filemap.o
   CC      mm/mempool.o
@@ -736,6 +747,7 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      mm/workingset.o
   CC      mm/debug.o
   CC      mm/gup.o
+  CC      mm/mmap_lock.o
   CC      mm/highmem.o
   CC      mm/memory.o
   CC      mm/mincore.o
@@ -750,6 +762,7 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      mm/pgtable-generic.o
   CC      mm/rmap.o
   CC      mm/vmalloc.o
+  CC      mm/ioremap.o
   CC      mm/process_vm_access.o
   CC      mm/page_alloc.o
   CC      mm/init-mm.o
@@ -798,7 +811,6 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      fs/quota/quota_tree.o
   CC      fs/quota/quota.o
   CC      fs/quota/kqid.o
-  CC      fs/quota/compat.o
   CC      fs/quota/netlink.o
   AR      fs/quota/built-in.a
   CC      fs/proc/task_mmu.o
@@ -876,6 +888,7 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      fs/ext4/xattr_hurd.o
   CC      fs/ext4/xattr_trusted.o
   CC      fs/ext4/xattr_user.o
+  CC      fs/ext4/fast_commit.o
   CC      fs/ext4/acl.o
   CC      fs/ext4/xattr_security.o
   AR      fs/ext4/built-in.a
@@ -1037,6 +1050,9 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      fs/fs_context.o
   CC      fs/fs_parser.o
   CC      fs/fsopen.o
+  CC      fs/init.o
+  CC      fs/kernel_read_file.o
+  CC      fs/remap_range.o
   CC      fs/buffer.o
   CC      fs/block_dev.o
   CC      fs/direct-io.o
@@ -1051,7 +1067,6 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      fs/io_uring.o
   CC      fs/io-wq.o
   CC      fs/locks.o
-  CC      fs/compat.o
   CC      fs/binfmt_misc.o
   CC      fs/binfmt_script.o
   CC      fs/binfmt_elf.o
@@ -1061,7 +1076,6 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      fs/coredump.o
   CC      fs/drop_caches.o
   CC      fs/fhandle.o
-  CC      fs/dcookies.o
   AR      fs/built-in.a
   CC      ipc/compat.o
   CC      ipc/util.o
@@ -1198,7 +1212,6 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      block/blk-map.o
   CC      block/blk-exec.o
   CC      block/blk-merge.o
-  CC      block/blk-softirq.o
   CC      block/blk-timeout.o
   CC      block/blk-lib.o
   CC      block/blk-mq.o
@@ -1212,7 +1225,6 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      block/ioprio.o
   CC      block/badblocks.o
   CC      block/blk-rq-qos.o
-  CC      block/bounce.o
   CC      block/scsi_ioctl.o
   CC      block/bsg.o
   CC      block/mq-deadline.o
@@ -1227,6 +1239,7 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      drivers/pci/pcie/portdrv_core.o
   CC      drivers/pci/pcie/portdrv_pci.o
   CC      drivers/pci/pcie/err.o
+  CC      drivers/pci/pcie/rcec.o
   CC      drivers/pci/pcie/aspm.o
   CC      drivers/pci/pcie/pme.o
   AR      drivers/pci/pcie/built-in.a
@@ -1254,11 +1267,11 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      drivers/pci/vc.o
   CC      drivers/pci/mmap.o
   CC      drivers/pci/setup-irq.o
+  CC      drivers/pci/msi.o
   CC      drivers/pci/proc.o
   CC      drivers/pci/slot.o
   CC      drivers/pci/pci-acpi.o
   CC      drivers/pci/quirks.o
-  CC      drivers/pci/msi.o
   CC      drivers/pci/ats.o
   CC      drivers/pci/pci-label.o
   AR      drivers/pci/built-in.a
@@ -1271,7 +1284,6 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      drivers/video/logo/logo_linux_clut224.o
   AR      drivers/video/logo/built-in.a
   CC      drivers/video/backlight/backlight.o
-  CC      drivers/video/backlight/generic_bl.o
   AR      drivers/video/backlight/built-in.a
   CC      drivers/video/fbdev/core/fb_cmdline.o
   CC      drivers/video/fbdev/core/fb_notify.o
@@ -1462,6 +1474,7 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   AR      drivers/acpi/acpica/built-in.a
   CC      drivers/acpi/numa/srat.o
   AR      drivers/acpi/numa/built-in.a
+  AR      drivers/acpi/pmic/built-in.a
   CC      drivers/acpi/dptf/int340x_thermal.o
   AR      drivers/acpi/dptf/built-in.a
   CC      drivers/acpi/tables.o
@@ -1500,6 +1513,7 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      drivers/acpi/acpi_cmos_rtc.o
   CC      drivers/acpi/x86/apple.o
   CC      drivers/acpi/x86/utils.o
+  CC      drivers/acpi/x86/s2idle.o
   CC      drivers/acpi/debugfs.o
   CC      drivers/acpi/acpi_lpat.o
   CC      drivers/acpi/acpi_lpit.o
@@ -1543,13 +1557,17 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   AR      drivers/clk/imx/built-in.a
   AR      drivers/clk/ingenic/built-in.a
   AR      drivers/clk/mediatek/built-in.a
+  AR      drivers/clk/mstar/built-in.a
   AR      drivers/clk/mvebu/built-in.a
+  AR      drivers/clk/ralink/built-in.a
   AR      drivers/clk/renesas/built-in.a
+  AR      drivers/clk/socfpga/built-in.a
   AR      drivers/clk/sprd/built-in.a
   AR      drivers/clk/ti/built-in.a
   AR      drivers/clk/versatile/built-in.a
   CC      drivers/clk/x86/clk-pmc-atom.o
   AR      drivers/clk/x86/built-in.a
+  AR      drivers/clk/xilinx/built-in.a
   CC      drivers/clk/clk-devres.o
   CC      drivers/clk/clk-bulk.o
   CC      drivers/clk/clkdev.o
@@ -1567,6 +1585,7 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      drivers/dma/dw/core.o
   CC      drivers/dma/dw/dw.o
   CC      drivers/dma/dw/idma32.o
+  CC      drivers/dma/dw/acpi.o
   AR      drivers/dma/dw/built-in.a
   CC      drivers/dma/hsu/hsu.o
   AR      drivers/dma/hsu/built-in.a
@@ -1578,6 +1597,8 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      drivers/dma/virt-dma.o
   CC      drivers/dma/acpi-dma.o
   AR      drivers/dma/built-in.a
+  AR      drivers/soc/aspeed/built-in.a
+  AR      drivers/soc/bcm/bcm63xx/built-in.a
   AR      drivers/soc/bcm/built-in.a
   AR      drivers/soc/fsl/built-in.a
   AR      drivers/soc/imx/built-in.a
@@ -1635,10 +1656,8 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      drivers/char/hw_random/via-rng.o
   AR      drivers/char/hw_random/built-in.a
   CC      drivers/char/agp/backend.o
-  CC      drivers/char/agp/frontend.o
   CC      drivers/char/agp/generic.o
   CC      drivers/char/agp/isoch.o
-  CC      drivers/char/agp/compat_ioctl.o
   CC      drivers/char/agp/amd64-agp.o
   CC      drivers/char/agp/intel-agp.o
   CC      drivers/char/agp/intel-gtt.o
@@ -1650,25 +1669,34 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      drivers/char/hpet.o
   CC      drivers/char/nvram.o
   AR      drivers/char/built-in.a
-  CC      drivers/iommu/iommu.o
-  CC      drivers/iommu/iommu-traces.o
-  CC      drivers/iommu/iommu-sysfs.o
-  CC      drivers/iommu/dma-iommu.o
-  CC      drivers/iommu/ioasid.o
-  CC      drivers/iommu/iova.o
   CC      drivers/iommu/amd/iommu.o
   CC      drivers/iommu/amd/init.o
   CC      drivers/iommu/amd/quirks.o
+  CC      drivers/iommu/amd/io_pgtable.o
+  AR      drivers/iommu/amd/built-in.a
   CC      drivers/iommu/intel/dmar.o
   CC      drivers/iommu/intel/iommu.o
   CC      drivers/iommu/intel/pasid.o
   CC      drivers/iommu/intel/trace.o
+  CC      drivers/iommu/intel/cap_audit.o
+  AR      drivers/iommu/intel/built-in.a
+  AR      drivers/iommu/arm/arm-smmu/built-in.a
+  AR      drivers/iommu/arm/arm-smmu-v3/built-in.a
+  AR      drivers/iommu/arm/built-in.a
+  CC      drivers/iommu/iommu.o
+  CC      drivers/iommu/iommu-traces.o
+  CC      drivers/iommu/iommu-sysfs.o
+  CC      drivers/iommu/dma-iommu.o
+  CC      drivers/iommu/io-pgtable.o
+  CC      drivers/iommu/ioasid.o
+  CC      drivers/iommu/iova.o
   AR      drivers/iommu/built-in.a
   AR      drivers/gpu/drm/arm/built-in.a
   CC      drivers/gpu/drm/i915/i915_drv.o
   CC      drivers/gpu/drm/i915/i915_config.o
   CC      drivers/gpu/drm/i915/i915_irq.o
   CC      drivers/gpu/drm/i915/i915_getparam.o
+  CC      drivers/gpu/drm/i915/i915_mitigations.o
   CC      drivers/gpu/drm/i915/i915_params.o
   CC      drivers/gpu/drm/i915/i915_pci.o
   CC      drivers/gpu/drm/i915/i915_scatterlist.o
@@ -1683,9 +1711,11 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      drivers/gpu/drm/i915/intel_pm.o
   CC      drivers/gpu/drm/i915/intel_runtime_pm.o
   CC      drivers/gpu/drm/i915/intel_sideband.o
+  CC      drivers/gpu/drm/i915/intel_step.o
   CC      drivers/gpu/drm/i915/intel_uncore.o
   CC      drivers/gpu/drm/i915/intel_wakeref.o
   CC      drivers/gpu/drm/i915/vlv_suspend.o
+  CC      drivers/gpu/drm/i915/dma_resv_utils.o
   CC      drivers/gpu/drm/i915/i915_memcpy.o
   CC      drivers/gpu/drm/i915/i915_mm.o
   CC      drivers/gpu/drm/i915/i915_sw_fence.o
@@ -1701,8 +1731,11 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      drivers/gpu/drm/i915/gt/debugfs_engines.o
   CC      drivers/gpu/drm/i915/gt/debugfs_gt.o
   CC      drivers/gpu/drm/i915/gt/debugfs_gt_pm.o
+  CC      drivers/gpu/drm/i915/gt/gen2_engine_cs.o
+  CC      drivers/gpu/drm/i915/gt/gen6_engine_cs.o
   CC      drivers/gpu/drm/i915/gt/gen6_ppgtt.o
   CC      drivers/gpu/drm/i915/gt/gen7_renderclear.o
+  CC      drivers/gpu/drm/i915/gt/gen8_engine_cs.o
   CC      drivers/gpu/drm/i915/gt/gen8_ppgtt.o
   CC      drivers/gpu/drm/i915/gt/intel_breadcrumbs.o
   CC      drivers/gpu/drm/i915/gt/intel_context.o
@@ -1712,6 +1745,7 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      drivers/gpu/drm/i915/gt/intel_engine_heartbeat.o
   CC      drivers/gpu/drm/i915/gt/intel_engine_pm.o
   CC      drivers/gpu/drm/i915/gt/intel_engine_user.o
+  CC      drivers/gpu/drm/i915/gt/intel_execlists_submission.o
   CC      drivers/gpu/drm/i915/gt/intel_ggtt.o
   CC      drivers/gpu/drm/i915/gt/intel_ggtt_fencing.o
   CC      drivers/gpu/drm/i915/gt/intel_gt.o
@@ -1727,12 +1761,14 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      drivers/gpu/drm/i915/gt/intel_mocs.o
   CC      drivers/gpu/drm/i915/gt/intel_ppgtt.o
   CC      drivers/gpu/drm/i915/gt/intel_rc6.o
+  CC      drivers/gpu/drm/i915/gt/intel_region_lmem.o
   CC      drivers/gpu/drm/i915/gt/intel_renderstate.o
   CC      drivers/gpu/drm/i915/gt/intel_reset.o
   CC      drivers/gpu/drm/i915/gt/intel_ring.o
   CC      drivers/gpu/drm/i915/gt/intel_ring_submission.o
   CC      drivers/gpu/drm/i915/gt/intel_rps.o
   CC      drivers/gpu/drm/i915/gt/intel_sseu.o
+  CC      drivers/gpu/drm/i915/gt/intel_sseu_debugfs.o
   CC      drivers/gpu/drm/i915/gt/intel_timeline.o
   CC      drivers/gpu/drm/i915/gt/intel_workarounds.o
   CC      drivers/gpu/drm/i915/gt/shmem_utils.o
@@ -1745,10 +1781,10 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      drivers/gpu/drm/i915/gem/i915_gem_clflush.o
   CC      drivers/gpu/drm/i915/gem/i915_gem_client_blt.o
   CC      drivers/gpu/drm/i915/gem/i915_gem_context.o
+  CC      drivers/gpu/drm/i915/gem/i915_gem_create.o
   CC      drivers/gpu/drm/i915/gem/i915_gem_dmabuf.o
   CC      drivers/gpu/drm/i915/gem/i915_gem_domain.o
   CC      drivers/gpu/drm/i915/gem/i915_gem_execbuffer.o
-  CC      drivers/gpu/drm/i915/gem/i915_gem_fence.o
   CC      drivers/gpu/drm/i915/gem/i915_gem_internal.o
   CC      drivers/gpu/drm/i915/gem/i915_gem_object.o
   CC      drivers/gpu/drm/i915/gem/i915_gem_object_blt.o
@@ -1778,7 +1814,6 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      drivers/gpu/drm/i915/i915_scheduler.o
   CC      drivers/gpu/drm/i915/i915_trace_points.o
   CC      drivers/gpu/drm/i915/i915_vma.o
-  CC      drivers/gpu/drm/i915/intel_region_lmem.o
   CC      drivers/gpu/drm/i915/intel_wopcm.o
   CC      drivers/gpu/drm/i915/gt/uc/intel_uc.o
   CC      drivers/gpu/drm/i915/gt/uc/intel_uc_debugfs.o
@@ -1803,13 +1838,18 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      drivers/gpu/drm/i915/display/intel_color.o
   CC      drivers/gpu/drm/i915/display/intel_combo_phy.o
   CC      drivers/gpu/drm/i915/display/intel_connector.o
+  CC      drivers/gpu/drm/i915/display/intel_crtc.o
   CC      drivers/gpu/drm/i915/display/intel_csr.o
+  CC      drivers/gpu/drm/i915/display/intel_cursor.o
   CC      drivers/gpu/drm/i915/display/intel_display.o
   CC      drivers/gpu/drm/i915/display/intel_display_power.o
   CC      drivers/gpu/drm/i915/display/intel_dpio_phy.o
+  CC      drivers/gpu/drm/i915/display/intel_dpll.o
   CC      drivers/gpu/drm/i915/display/intel_dpll_mgr.o
   CC      drivers/gpu/drm/i915/display/intel_dsb.o
+  CC      drivers/gpu/drm/i915/display/intel_fb.o
   CC      drivers/gpu/drm/i915/display/intel_fbc.o
+  CC      drivers/gpu/drm/i915/display/intel_fdi.o
   CC      drivers/gpu/drm/i915/display/intel_fifo_underrun.o
   CC      drivers/gpu/drm/i915/display/intel_frontbuffer.o
   CC      drivers/gpu/drm/i915/display/intel_global_state.o
@@ -1822,6 +1862,9 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      drivers/gpu/drm/i915/display/intel_sprite.o
   CC      drivers/gpu/drm/i915/display/intel_tc.o
   CC      drivers/gpu/drm/i915/display/intel_vga.o
+  CC      drivers/gpu/drm/i915/display/i9xx_plane.o
+  CC      drivers/gpu/drm/i915/display/skl_scaler.o
+  CC      drivers/gpu/drm/i915/display/skl_universal_plane.o
   CC      drivers/gpu/drm/i915/display/intel_acpi.o
   CC      drivers/gpu/drm/i915/display/intel_opregion.o
   CC      drivers/gpu/drm/i915/display/intel_fbdev.o
@@ -1831,11 +1874,16 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      drivers/gpu/drm/i915/display/dvo_ns2501.o
   CC      drivers/gpu/drm/i915/display/dvo_sil164.o
   CC      drivers/gpu/drm/i915/display/dvo_tfp410.o
+  CC      drivers/gpu/drm/i915/display/g4x_dp.o
+  CC      drivers/gpu/drm/i915/display/g4x_hdmi.o
   CC      drivers/gpu/drm/i915/display/icl_dsi.o
   CC      drivers/gpu/drm/i915/display/intel_crt.o
   CC      drivers/gpu/drm/i915/display/intel_ddi.o
+  CC      drivers/gpu/drm/i915/display/intel_ddi_buf_trans.o
   CC      drivers/gpu/drm/i915/display/intel_dp.o
+  CC      drivers/gpu/drm/i915/display/intel_dp_aux.o
   CC      drivers/gpu/drm/i915/display/intel_dp_aux_backlight.o
+  CC      drivers/gpu/drm/i915/display/intel_dp_hdcp.o
   CC      drivers/gpu/drm/i915/display/intel_dp_link_training.o
   CC      drivers/gpu/drm/i915/display/intel_dp_mst.o
   CC      drivers/gpu/drm/i915/display/intel_dsi.o
@@ -1847,9 +1895,11 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      drivers/gpu/drm/i915/display/intel_lspcon.o
   CC      drivers/gpu/drm/i915/display/intel_lvds.o
   CC      drivers/gpu/drm/i915/display/intel_panel.o
+  CC      drivers/gpu/drm/i915/display/intel_pps.o
   CC      drivers/gpu/drm/i915/display/intel_sdvo.o
   CC      drivers/gpu/drm/i915/display/intel_tv.o
   CC      drivers/gpu/drm/i915/display/intel_vdsc.o
+  CC      drivers/gpu/drm/i915/display/intel_vrr.o
   CC      drivers/gpu/drm/i915/display/vlv_dsi.o
   CC      drivers/gpu/drm/i915/display/vlv_dsi_pll.o
   CC      drivers/gpu/drm/i915/i915_perf.o
@@ -1857,17 +1907,19 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      drivers/gpu/drm/i915/i915_vgpu.o
   AR      drivers/gpu/drm/i915/built-in.a
   AR      drivers/gpu/drm/rcar-du/built-in.a
-  AR      drivers/gpu/drm/omapdrm/dss/built-in.a
-  AR      drivers/gpu/drm/omapdrm/displays/built-in.a
   AR      drivers/gpu/drm/omapdrm/built-in.a
   AR      drivers/gpu/drm/tilcdc/built-in.a
+  AR      drivers/gpu/drm/imx/built-in.a
   AR      drivers/gpu/drm/i2c/built-in.a
   AR      drivers/gpu/drm/panel/built-in.a
   AR      drivers/gpu/drm/bridge/analogix/built-in.a
+  AR      drivers/gpu/drm/bridge/cadence/built-in.a
   AR      drivers/gpu/drm/bridge/synopsys/built-in.a
   AR      drivers/gpu/drm/bridge/built-in.a
   AR      drivers/gpu/drm/hisilicon/built-in.a
   AR      drivers/gpu/drm/tiny/built-in.a
+  AR      drivers/gpu/drm/xlnx/built-in.a
+  AR      drivers/gpu/drm/gud/built-in.a
   CC      drivers/gpu/drm/drm_bridge_connector.o
   CC      drivers/gpu/drm/drm_crtc_helper.o
   CC      drivers/gpu/drm/drm_dp_helper.o
@@ -1881,6 +1933,7 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      drivers/gpu/drm/drm_simple_kms_helper.o
   CC      drivers/gpu/drm/drm_modeset_helper.o
   CC      drivers/gpu/drm/drm_scdc_helper.o
+  CC      drivers/gpu/drm/drm_gem_atomic_helper.o
   CC      drivers/gpu/drm/drm_gem_framebuffer_helper.o
   CC      drivers/gpu/drm/drm_atomic_state_helper.o
   CC      drivers/gpu/drm/drm_damage_helper.o
@@ -1894,7 +1947,6 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      drivers/gpu/drm/drm_gem.o
   CC      drivers/gpu/drm/drm_ioctl.o
   CC      drivers/gpu/drm/drm_irq.o
-  CC      drivers/gpu/drm/drm_memory.o
   CC      drivers/gpu/drm/drm_drv.o
   CC      drivers/gpu/drm/drm_sysfs.o
   CC      drivers/gpu/drm/drm_hashtab.o
@@ -1903,6 +1955,7 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      drivers/gpu/drm/drm_fourcc.o
   CC      drivers/gpu/drm/drm_modes.o
   CC      drivers/gpu/drm/drm_edid.o
+  CC      drivers/gpu/drm/drm_displayid.o
   CC      drivers/gpu/drm/drm_encoder_slave.o
   CC      drivers/gpu/drm/drm_trace_points.o
   CC      drivers/gpu/drm/drm_prime.o
@@ -1932,6 +1985,7 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      drivers/gpu/drm/drm_atomic_uapi.o
   CC      drivers/gpu/drm/drm_hdcp.o
   CC      drivers/gpu/drm/drm_managed.o
+  CC      drivers/gpu/drm/drm_vblank_work.o
   CC      drivers/gpu/drm/drm_ioc32.o
   CC      drivers/gpu/drm/drm_panel.o
   CC      drivers/gpu/drm/drm_agpsupport.o
@@ -1989,7 +2043,6 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      drivers/base/container.o
   CC      drivers/base/property.o
   CC      drivers/base/cacheinfo.o
-  CC      drivers/base/devcon.o
   CC      drivers/base/swnode.o
   CC      drivers/base/devtmpfs.o
   CC      drivers/base/node.o
@@ -2002,8 +2055,6 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   AR      drivers/misc/cb710/built-in.a
   AR      drivers/misc/ti-st/built-in.a
   AR      drivers/misc/lis3lv02d/built-in.a
-  AR      drivers/misc/mic/bus/built-in.a
-  AR      drivers/misc/mic/built-in.a
   AR      drivers/misc/cardreader/built-in.a
   AR      drivers/misc/built-in.a
   AR      drivers/mfd/built-in.a
@@ -2066,6 +2117,7 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      drivers/ata/pata_sch.o
   AR      drivers/ata/built-in.a
   CC      drivers/net/phy/mdio-boardinfo.o
+  CC      drivers/net/phy/mdio_devres.o
   CC      drivers/net/phy/phy.o
   CC      drivers/net/phy/phy-c45.o
   CC      drivers/net/phy/phy-core.o
@@ -2075,13 +2127,8 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      drivers/net/phy/mdio_device.o
   CC      drivers/net/phy/realtek.o
   AR      drivers/net/phy/built-in.a
-  AR      drivers/net/dsa/b53/built-in.a
-  AR      drivers/net/dsa/microchip/built-in.a
-  AR      drivers/net/dsa/mv88e6xxx/built-in.a
-  AR      drivers/net/dsa/ocelot/built-in.a
-  AR      drivers/net/dsa/qca/built-in.a
-  AR      drivers/net/dsa/sja1105/built-in.a
-  AR      drivers/net/dsa/built-in.a
+  AR      drivers/net/mdio/built-in.a
+  AR      drivers/net/pcs/built-in.a
   AR      drivers/net/ethernet/3com/built-in.a
   AR      drivers/net/ethernet/8390/built-in.a
   AR      drivers/net/ethernet/adaptec/built-in.a
@@ -2093,7 +2140,6 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   AR      drivers/net/ethernet/aquantia/built-in.a
   AR      drivers/net/ethernet/arc/built-in.a
   AR      drivers/net/ethernet/atheros/built-in.a
-  AR      drivers/net/ethernet/aurora/built-in.a
   AR      drivers/net/ethernet/cadence/built-in.a
   CC      drivers/net/ethernet/broadcom/tg3.o
   AR      drivers/net/ethernet/broadcom/built-in.a
@@ -2134,7 +2180,9 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      drivers/net/ethernet/intel/e100.o
   AR      drivers/net/ethernet/intel/built-in.a
   AR      drivers/net/ethernet/i825xx/built-in.a
+  AR      drivers/net/ethernet/microsoft/built-in.a
   AR      drivers/net/ethernet/marvell/octeontx2/built-in.a
+  AR      drivers/net/ethernet/marvell/prestera/built-in.a
   CC      drivers/net/ethernet/marvell/sky2.o
   AR      drivers/net/ethernet/marvell/built-in.a
   AR      drivers/net/ethernet/mellanox/built-in.a
@@ -2188,6 +2236,7 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   AR      drivers/net/wireless/intersil/built-in.a
   AR      drivers/net/wireless/marvell/built-in.a
   AR      drivers/net/wireless/mediatek/built-in.a
+  AR      drivers/net/wireless/microchip/built-in.a
   AR      drivers/net/wireless/ralink/built-in.a
   AR      drivers/net/wireless/realtek/built-in.a
   AR      drivers/net/wireless/rsi/built-in.a
@@ -2299,7 +2348,6 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   AR      drivers/input/mouse/built-in.a
   AR      drivers/input/joystick/built-in.a
   AR      drivers/input/tablet/built-in.a
-  CC      drivers/input/touchscreen/of_touchscreen.o
   AR      drivers/input/touchscreen/built-in.a
   AR      drivers/input/misc/built-in.a
   CC      drivers/input/input.o
@@ -2307,14 +2355,13 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      drivers/input/input-mt.o
   CC      drivers/input/input-poller.o
   CC      drivers/input/ff-core.o
+  CC      drivers/input/touchscreen.o
   CC      drivers/input/ff-memless.o
-  CC      drivers/input/input-polldev.o
   CC      drivers/input/sparse-keymap.o
   CC      drivers/input/input-leds.o
   CC      drivers/input/evdev.o
   AR      drivers/input/built-in.a
   CC      drivers/rtc/lib.o
-  CC      drivers/rtc/systohc.o
   CC      drivers/rtc/class.o
   CC      drivers/rtc/interface.o
   CC      drivers/rtc/nvmem.o
@@ -2407,6 +2454,7 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   AR      drivers/hwmon/built-in.a
   AR      drivers/thermal/broadcom/built-in.a
   AR      drivers/thermal/samsung/built-in.a
+  CC      drivers/thermal/intel/therm_throt.o
   AR      drivers/thermal/intel/built-in.a
   CC [M]  drivers/thermal/intel/x86_pkg_temp_thermal.o
   AR      drivers/thermal/st/built-in.a
@@ -2421,6 +2469,7 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   AR      drivers/watchdog/built-in.a
   CC      drivers/md/md.o
   CC      drivers/md/md-bitmap.o
+  CC      drivers/md/md-autodetect.o
   CC      drivers/md/dm.o
   CC      drivers/md/dm-table.o
   CC      drivers/md/dm-target.o
@@ -2458,10 +2507,12 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   AR      drivers/cpuidle/built-in.a
   AR      drivers/mmc/built-in.a
   AR      drivers/leds/trigger/built-in.a
+  AR      drivers/leds/blink/built-in.a
   CC      drivers/leds/led-core.o
   CC      drivers/leds/led-class.o
   CC      drivers/leds/led-triggers.o
   AR      drivers/leds/built-in.a
+  AR      drivers/firmware/arm_scmi/built-in.a
   AR      drivers/firmware/broadcom/built-in.a
   AR      drivers/firmware/meson/built-in.a
   CC      drivers/firmware/efi/libstub/efi-stub-helper.o
@@ -2503,7 +2554,6 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      drivers/firmware/efi/reboot.o
   CC      drivers/firmware/efi/memattr.o
   CC      drivers/firmware/efi/tpm.o
-  CC      drivers/firmware/efi/capsule.o
   CC      drivers/firmware/efi/memmap.o
   CC      drivers/firmware/efi/efivars.o
   CC      drivers/firmware/efi/esrt.o
@@ -2521,6 +2571,7 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      drivers/firmware/memmap.o
   AR      drivers/firmware/built-in.a
   AR      drivers/crypto/hisilicon/built-in.a
+  AR      drivers/crypto/keembay/built-in.a
   AR      drivers/crypto/built-in.a
   CC      drivers/clocksource/acpi_pm.o
   CC      drivers/clocksource/i8253.o
@@ -2563,6 +2614,7 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      drivers/platform/x86/eeepc-laptop.o
   CC      drivers/platform/x86/pmc_atom.o
   AR      drivers/platform/x86/built-in.a
+  AR      drivers/platform/surface/built-in.a
   AR      drivers/platform/built-in.a
   CC      drivers/mailbox/mailbox.o
   CC      drivers/mailbox/pcc.o
@@ -2700,9 +2752,11 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      sound/hda/hdac_i915.o
   CC      sound/hda/intel-dsp-config.o
   CC      sound/hda/intel-nhlt.o
+  CC      sound/hda/intel-sdw-acpi.o
   AR      sound/hda/built-in.a
   AR      sound/x86/built-in.a
   AR      sound/xen/built-in.a
+  AR      sound/virtio/built-in.a
   CC      sound/sound_core.o
   CC      sound/last.o
   AR      sound/built-in.a
@@ -2739,6 +2793,7 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      net/core/netpoll.o
   CC      net/core/fib_rules.o
   CC      net/core/net-traces.o
+  CC      net/core/selftests.o
   CC      net/core/ptp_classifier.o
   CC      net/core/dst_cache.o
   CC      net/core/gro_cells.o
@@ -2748,6 +2803,7 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   AR      net/802/built-in.a
   CC      net/sched/sch_generic.o
   CC      net/sched/sch_mq.o
+  CC      net/sched/sch_frag.o
   CC      net/sched/sch_api.o
   CC      net/sched/sch_blackhole.o
   CC      net/sched/cls_api.o
@@ -2779,6 +2835,10 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      net/ethtool/eee.o
   CC      net/ethtool/tsinfo.o
   CC      net/ethtool/cabletest.o
+  CC      net/ethtool/tunnels.o
+  CC      net/ethtool/fec.o
+  CC      net/ethtool/eeprom.o
+  CC      net/ethtool/stats.o
   AR      net/ethtool/built-in.a
   CC      net/netfilter/core.o
   CC      net/netfilter/nf_log.o
@@ -2821,7 +2881,7 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      net/netfilter/xt_policy.o
   CC      net/netfilter/xt_state.o
   AR      net/netfilter/built-in.a
-  CC [M]  net/netfilter/nf_log_common.o
+  CC [M]  net/netfilter/nf_log_syslog.o
   CC [M]  net/netfilter/xt_mark.o
   CC [M]  net/netfilter/xt_nat.o
   CC [M]  net/netfilter/xt_LOG.o
@@ -2834,8 +2894,6 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      net/ipv4/netfilter/iptable_mangle.o
   CC      net/ipv4/netfilter/ipt_REJECT.o
   AR      net/ipv4/netfilter/built-in.a
-  CC [M]  net/ipv4/netfilter/nf_log_arp.o
-  CC [M]  net/ipv4/netfilter/nf_log_ipv4.o
   CC [M]  net/ipv4/netfilter/iptable_nat.o
   CC      net/ipv4/route.o
   CC      net/ipv4/inetpeer.o
@@ -2883,6 +2941,7 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      net/ipv4/metrics.o
   CC      net/ipv4/netlink.o
   CC      net/ipv4/nexthop.o
+  CC      net/ipv4/udp_tunnel_stub.o
   CC      net/ipv4/ip_tunnel.o
   CC      net/ipv4/sysctl_net_ipv4.o
   CC      net/ipv4/proc.o
@@ -2926,7 +2985,6 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      net/ipv6/netfilter/ip6t_ipv6header.o
   CC      net/ipv6/netfilter/ip6t_REJECT.o
   AR      net/ipv6/netfilter/built-in.a
-  CC [M]  net/ipv6/netfilter/nf_log_ipv6.o
   CC      net/ipv6/af_inet6.o
   CC      net/ipv6/anycast.o
   CC      net/ipv6/ip6_output.o
@@ -3046,6 +3104,7 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      net/mac80211/agg-rx.o
   CC      net/mac80211/vht.o
   CC      net/mac80211/he.o
+  CC      net/mac80211/s1g.o
   CC      net/mac80211/ibss.o
   CC      net/mac80211/iface.o
   CC      net/mac80211/rate.o
@@ -3070,7 +3129,6 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      net/mac80211/airtime.o
   CC      net/mac80211/led.o
   CC      net/mac80211/pm.o
-  CC      net/mac80211/rc80211_minstrel.o
   CC      net/mac80211/rc80211_minstrel_ht.o
   AR      net/mac80211/built-in.a
   CC      net/netlabel/netlabel_user.o
@@ -3144,6 +3202,12 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   AR      lib/lzo/built-in.a
   CC      lib/lz4/lz4_decompress.o
   AR      lib/lz4/built-in.a
+  CC      lib/zstd/huf_decompress.o
+  CC      lib/zstd/decompress.o
+  CC      lib/zstd/entropy_common.o
+  CC      lib/zstd/fse_decompress.o
+  CC      lib/zstd/zstd_common.o
+  AR      lib/zstd/built-in.a
   CC      lib/xz/xz_dec_syms.o
   CC      lib/xz/xz_dec_stream.o
   CC      lib/xz/xz_dec_lzma2.o
@@ -3156,9 +3220,16 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      lib/mpi/generic_mpih-rshift.o
   CC      lib/mpi/generic_mpih-sub1.o
   CC      lib/mpi/generic_mpih-add1.o
+  CC      lib/mpi/ec.o
   CC      lib/mpi/mpicoder.o
+  CC      lib/mpi/mpi-add.o
   CC      lib/mpi/mpi-bit.o
   CC      lib/mpi/mpi-cmp.o
+  CC      lib/mpi/mpi-sub-ui.o
+  CC      lib/mpi/mpi-div.o
+  CC      lib/mpi/mpi-inv.o
+  CC      lib/mpi/mpi-mod.o
+  CC      lib/mpi/mpi-mul.o
   CC      lib/mpi/mpih-cmp.o
   CC      lib/mpi/mpih-div.o
   CC      lib/mpi/mpih-mul.o
@@ -3171,6 +3242,7 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   AR      lib/fonts/built-in.a
   CC      lib/argv_split.o
   CC      lib/bug.o
+  CC      lib/buildid.o
   CC      lib/clz_tab.o
   CC      lib/cmdline.o
   CC      lib/cpumask.o
@@ -3183,12 +3255,12 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      lib/decompress_unlzma.o
   CC      lib/decompress_unlzo.o
   CC      lib/decompress_unxz.o
+  CC      lib/decompress_unzstd.o
   CC      lib/dump_stack.o
   CC      lib/earlycpio.o
   CC      lib/extable.o
   CC      lib/flex_proportions.o
   CC      lib/idr.o
-  CC      lib/ioremap.o
   CC      lib/irq_regs.o
   CC      lib/is_single_threaded.o
   CC      lib/klist.o
@@ -3255,6 +3327,7 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   HOSTCC  lib/gen_crc32table
   GEN     lib/crc32table.h
   CC      lib/crc32.o
+  CC      lib/xxhash.o
   CC      lib/genalloc.o
   CC      lib/percpu_counter.o
   CC      lib/error-inject.o
@@ -3277,6 +3350,8 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   AS      arch/x86/lib/clear_page_64.o
   CC      arch/x86/lib/cmdline.o
   AS      arch/x86/lib/cmpxchg16b_emu.o
+  CC      arch/x86/lib/copy_mc.o
+  AS      arch/x86/lib/copy_mc_64.o
   AS      arch/x86/lib/copy_page_64.o
   AS      arch/x86/lib/copy_user_64.o
   CC      arch/x86/lib/cpu.o
@@ -3316,9 +3391,11 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   MODINFO modules.builtin.modinfo
   GEN     modules.builtin
   LD      .tmp_vmlinux.kallsyms1
-  KSYM    .tmp_vmlinux.kallsyms1.o
+  KSYMS   .tmp_vmlinux.kallsyms1.S
+  AS      .tmp_vmlinux.kallsyms1.S
   LD      .tmp_vmlinux.kallsyms2
-  KSYM    .tmp_vmlinux.kallsyms2.o
+  KSYMS   .tmp_vmlinux.kallsyms2.S
+  AS      .tmp_vmlinux.kallsyms2.S
   LD      vmlinux
   SORTTAB vmlinux
   SYSMAP  System.map
@@ -3350,7 +3427,9 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   CC      arch/x86/boot/compressed/cpuflags.o
   CC      arch/x86/boot/compressed/early_serial_console.o
   CC      arch/x86/boot/compressed/kaslr.o
-  CC      arch/x86/boot/compressed/kaslr_64.o
+  CC      arch/x86/boot/compressed/ident_map_64.o
+  CC      arch/x86/boot/compressed/idt_64.o
+  AS      arch/x86/boot/compressed/idt_handlers_64.o
   AS      arch/x86/boot/compressed/mem_encrypt.o
   CC      arch/x86/boot/compressed/pgtable_64.o
   CC      arch/x86/boot/compressed/acpi.o
@@ -3377,25 +3456,18 @@ ln -sf ../init.d/reboot      /etc/rc.d/rc6.d/S99reboot
   OBJCOPY arch/x86/boot/vmlinux.bin
   HOSTCC  arch/x86/boot/tools/build
   BUILD   arch/x86/boot/bzImage
-Setup is 13884 bytes (padded to 14336 bytes).
-System is 8831 kB
-CRC b9ca57e8
 Kernel: arch/x86/boot/bzImage is ready  (#1)
-  MODPOST Module.symvers
+  LDS     scripts/module.lds
+  MODPOST modules-only.symvers
+  GEN     Module.symvers
   CC [M]  drivers/thermal/intel/x86_pkg_temp_thermal.mod.o
   LD [M]  drivers/thermal/intel/x86_pkg_temp_thermal.ko
   CC [M]  fs/efivarfs/efivarfs.mod.o
   LD [M]  fs/efivarfs/efivarfs.ko
   CC [M]  net/ipv4/netfilter/iptable_nat.mod.o
   LD [M]  net/ipv4/netfilter/iptable_nat.ko
-  CC [M]  net/ipv4/netfilter/nf_log_arp.mod.o
-  LD [M]  net/ipv4/netfilter/nf_log_arp.ko
-  CC [M]  net/ipv4/netfilter/nf_log_ipv4.mod.o
-  LD [M]  net/ipv4/netfilter/nf_log_ipv4.ko
-  CC [M]  net/ipv6/netfilter/nf_log_ipv6.mod.o
-  LD [M]  net/ipv6/netfilter/nf_log_ipv6.ko
-  CC [M]  net/netfilter/nf_log_common.mod.o
-  LD [M]  net/netfilter/nf_log_common.ko
+  CC [M]  net/netfilter/nf_log_syslog.mod.o
+  LD [M]  net/netfilter/nf_log_syslog.ko
   CC [M]  net/netfilter/xt_LOG.mod.o
   LD [M]  net/netfilter/xt_LOG.ko
   CC [M]  net/netfilter/xt_MASQUERADE.mod.o
@@ -3406,22 +3478,19 @@ Kernel: arch/x86/boot/bzImage is ready  (#1)
   LD [M]  net/netfilter/xt_mark.ko
   CC [M]  net/netfilter/xt_nat.mod.o
   LD [M]  net/netfilter/xt_nat.ko
-  INSTALL drivers/thermal/intel/x86_pkg_temp_thermal.ko
-  INSTALL fs/efivarfs/efivarfs.ko
-  INSTALL net/ipv4/netfilter/iptable_nat.ko
-  INSTALL net/ipv4/netfilter/nf_log_arp.ko
-  INSTALL net/ipv4/netfilter/nf_log_ipv4.ko
-  INSTALL net/ipv6/netfilter/nf_log_ipv6.ko
-  INSTALL net/netfilter/nf_log_common.ko
-  INSTALL net/netfilter/xt_LOG.ko
-  INSTALL net/netfilter/xt_MASQUERADE.ko
-  INSTALL net/netfilter/xt_addrtype.ko
-  INSTALL net/netfilter/xt_mark.ko
-  INSTALL net/netfilter/xt_nat.ko
-  DEPMOD  5.8.3
-'arch/x86/boot/bzImage' -> '/boot/vmlinuz-5.8.3-lfs-10.0'
-'System.map' -> '/boot/System.map-5.8.3'
-'.config' -> '/boot/config-5.8.3'
-[lfs-scripts] Finishing build of linux-5.8.3 at Tue Feb  2 12:18:42 -03 2021
+  INSTALL /lib/modules/5.13.12/kernel/drivers/thermal/intel/x86_pkg_temp_thermal.ko
+  INSTALL /lib/modules/5.13.12/kernel/fs/efivarfs/efivarfs.ko
+  INSTALL /lib/modules/5.13.12/kernel/net/ipv4/netfilter/iptable_nat.ko
+  INSTALL /lib/modules/5.13.12/kernel/net/netfilter/nf_log_syslog.ko
+  INSTALL /lib/modules/5.13.12/kernel/net/netfilter/xt_LOG.ko
+  INSTALL /lib/modules/5.13.12/kernel/net/netfilter/xt_MASQUERADE.ko
+  INSTALL /lib/modules/5.13.12/kernel/net/netfilter/xt_addrtype.ko
+  INSTALL /lib/modules/5.13.12/kernel/net/netfilter/xt_mark.ko
+  INSTALL /lib/modules/5.13.12/kernel/net/netfilter/xt_nat.ko
+  DEPMOD  /lib/modules/5.13.12
+'arch/x86/boot/bzImage' -> '/boot/vmlinuz-5.13.12-lfs-11.0'
+'System.map' -> '/boot/System.map-5.13.12'
+'.config' -> '/boot/config-5.13.12'
+[lfs-scripts] Finishing build of linux-5.13.12 at Tue Sep 14 13:48:38 -03 2021
 install: creating directory '/etc/modprobe.d'
 [lfs-scripts] The end

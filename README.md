@@ -1,5 +1,5 @@
 # lfs-scripts :penguin:
-Instructions and scripts to build LFS (Linux From Scratch), version 10.0, as simply as possible (I know, not that simple, but anyway).
+Instructions and scripts to build Linux From Scratch (LFS), version 11.0, as simply as possible (I know, not that simple, but anyway).
 
 ![Output of uname -a](https://github.com/luisgbm/lfs-scripts/blob/master/img/uname.png?raw=true)
 
@@ -7,13 +7,13 @@ Instructions and scripts to build LFS (Linux From Scratch), version 10.0, as sim
 
 # Foreword
 
-First, this guide does not replace reading the whole LFS book. I highly recommend that you read it at least once. Only then you should use the automation scripts provided here.
+First, this guide does not replace reading the whole LFS book. I highly recommend that you read it at least once. Only then you should use the automated scripts provided here.
 
-This build will be accomplished inside a virtual machine. I'll be using Oracle VirtualBox, but you can use the tool of your personal preference. I'm running an Arch Linux VM, feel free to use your GNU/Linux distribution of choice. Just be sure to install the development tools available (base-devel package on Arch).
+This build will be accomplished inside a virtual machine. I'll be using Oracle VirtualBox, but you can use any tool of your personal preference. I'm running an Arch Linux VM, feel free to use your GNU/Linux distribution of choice. Just be sure to install the development tools available (base-devel package on Arch).
 
 My VM has two virtual hard disks: one for the host (Arch Linux itself) and another for building LFS. You could also use a single hard disk with two partitions, that's also up to personal taste. I've decided to use two separate hard disks so I can completely isolate LFS from the host after the build. At the end, you'll be able to create a separate VM and boot from it directly.
 
-The packages needed to build LFS were downloaded from [here](http://ftp.lfs-matrix.net/pub/lfs/lfs-packages/lfs-packages-10.0.tar) (423 MB), other mirrors are available [here](http://linuxfromscratch.org/lfs/download.html) (look for the "LFS HTTP/FTP Sites" section at the bottom, the file you need is lfs-packages-10.0.tar).
+The packages needed to build LFS were downloaded from [here](http://ftp.osuosl.org/pub/lfs/lfs-packages/lfs-packages-11.0.tar) (443 MB), other mirrors are available [here](http://linuxfromscratch.org/lfs/download.html) (look for the "LFS HTTP/FTP Sites" section at the bottom, the file you need is lfs-packages-11.0.tar).
 
 # Build instructions
 
@@ -47,15 +47,14 @@ Source the file:
 source .bashrc
 ```
 
-Download all the packages and extract them to $LFS/sources. The tcl package must be renamed in order to work with the scripts that will follow.
+Download all the packages and extract them to $LFS/sources.
 
 ```
 cd $LFS
-cp /<location_of_the_package>/lfs-packages-10.0.tar .
-tar xf lfs-packages-10.0.tar
-mv 10.0 sources
+cp /<location_of_the_package>/lfs-packages-11.0.tar .
+tar xf lfs-packages-11.0.tar
+mv 11.0 sources
 chmod -v a+wt $LFS/sources
-mv $LFS/sources/tcl8.6.10-src.tar.gz $LFS/sources/tcl8.6.10.tar.gz
 ```
 
 Copy all the shell scripts from this repository to your $LFS directory:
@@ -67,7 +66,17 @@ cp /<location_of_the_scripts>/*.sh $LFS
 Create the basic filesystem for LFS:
 
 ```
-mkdir -pv $LFS/{bin,etc,lib,sbin,usr,var,lib64,tools}
+mkdir -pv $LFS/{etc,var} $LFS/usr/{bin,lib,sbin}
+
+for i in bin lib sbin; do
+  ln -sv usr/$i $LFS/$i
+done
+
+case $(uname -m) in
+  x86_64) mkdir -pv $LFS/lib64 ;;
+esac
+
+mkdir -pv $LFS/tools
 ```
 
 Create the lfs user, used during the initial build process (you will have to type a password):
@@ -113,19 +122,20 @@ LFS_TGT=$(uname -m)-lfs-linux-gnu
 PATH=/usr/bin
 if [ ! -L /bin ]; then PATH=/bin:$PATH; fi
 PATH=$LFS/tools/bin:$PATH
-export LFS LC_ALL LFS_TGT PATH
+CONFIG_SITE=$LFS/usr/share/config.site
+export LFS LC_ALL LFS_TGT PATH CONFIG_SITE
 EOF
 
 source ~/.bashrc
 ```
 
-Run the lfs-cross.sh script, which will build the cross-toolchain and cross compiling temporary tools from chapters 5 and 6:
+Run the lfs-cross.sh script, which will build the cross toolchain and cross compiling temporary tools from chapters 5 and 6:
 
 ``` 
 sh $LFS/lfs-cross.sh | tee $LFS/lfs-cross.log
 ```
 
-Return to being root:
+Exit from the lfs user to become root again:
 
 ```
 exit
@@ -163,7 +173,7 @@ chroot "$LFS" /usr/bin/env -i   \
     HOME=/root                  \
     TERM="$TERM"                \
     PS1='(lfs chroot) \u:\w\$ ' \
-    PATH=/bin:/usr/bin:/sbin:/usr/sbin \
+    PATH=/usr/bin:/usr/sbin     \
     /bin/bash --login +h
 ```
 
@@ -174,25 +184,36 @@ mkdir -pv /{boot,home,mnt,opt,srv}
 mkdir -pv /etc/{opt,sysconfig}
 mkdir -pv /lib/firmware
 mkdir -pv /media/{floppy,cdrom}
-mkdir -pv /usr/{,local/}{bin,include,lib,sbin,src}
+mkdir -pv /usr/{,local/}{include,src}
+mkdir -pv /usr/local/{bin,lib,sbin}
 mkdir -pv /usr/{,local/}share/{color,dict,doc,info,locale,man}
 mkdir -pv /usr/{,local/}share/{misc,terminfo,zoneinfo}
 mkdir -pv /usr/{,local/}share/man/man{1..8}
 mkdir -pv /var/{cache,local,log,mail,opt,spool}
 mkdir -pv /var/lib/{color,misc,locate}
+
 ln -sfv /run /var/run
 ln -sfv /run/lock /var/lock
+
 install -dv -m 0750 /root
 install -dv -m 1777 /tmp /var/tmp
+
 ln -sv /proc/self/mounts /etc/mtab
-echo "127.0.0.1 localhost $(hostname)" > /etc/hosts
+
+cat > /etc/hosts << EOF
+127.0.0.1  localhost $(hostname)
+::1        localhost
+EOF
+
 cat > /etc/passwd << "EOF"
 root:x:0:0:root:/root:/bin/bash
 bin:x:1:1:bin:/dev/null:/bin/false
 daemon:x:6:6:Daemon User:/dev/null:/bin/false
-messagebus:x:18:18:D-Bus Message Daemon User:/var/run/dbus:/bin/false
+messagebus:x:18:18:D-Bus Message Daemon User:/run/dbus:/bin/false
+uuidd:x:80:80:UUID Generation Daemon User:/dev/null:/bin/false
 nobody:x:99:99:Unprivileged User:/dev/null:/bin/false
 EOF
+
 cat > /etc/group << "EOF"
 root:x:0:
 bin:x:1:daemon
@@ -215,14 +236,17 @@ messagebus:x:18:
 input:x:24:
 mail:x:34:
 kvm:x:61:
+uuidd:x:80:
 wheel:x:97:
 nogroup:x:99:
 users:x:999:
 EOF
+
 touch /var/log/{btmp,lastlog,faillog,wtmp}
 chgrp -v utmp /var/log/lastlog
 chmod -v 664  /var/log/lastlog
 chmod -v 600  /var/log/btmp
+
 exec /bin/bash --login +h
 ```
 
@@ -235,8 +259,9 @@ sh /lfs-chroot.sh | tee /lfs-chroot.log
 Cleanup before the final build phase:
 
 ```
-find /usr/{lib,libexec} -name \*.la -delete
 rm -rf /usr/share/{info,man,doc}/*
+find /usr/{lib,libexec} -name \*.la -delete
+rm -rf /tools
 ```
 
 For the final build phase, run the lfs-system.sh script:
@@ -255,10 +280,11 @@ Logout from the chroot environment and re-enter it with updated configuration:
 
 ```
 logout
+
 chroot "$LFS" /usr/bin/env -i          \
     HOME=/root TERM="$TERM"            \
     PS1='(lfs chroot) \u:\w\$ '        \
-    PATH=/bin:/usr/bin:/sbin:/usr/sbin \
+    PATH=/usr/bin:/usr/sbin            \
     /bin/bash --login
 ```
 

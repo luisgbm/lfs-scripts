@@ -1,8 +1,8 @@
 #!/bin/bash
-# LFS 10.0 Build Script
+# LFS 11.0 Build Script
 # Final steps to configure the system
 # by Luís Mendes :)
-# 17/09/2020
+# 13/Sep/2021
 
 package_name=""
 package_ext=""
@@ -10,9 +10,9 @@ package_ext=""
 begin() {
 	package_name=$1
 	package_ext=$2
-	
+
 	echo "[lfs-scripts] Starting build of $package_name at $(date)"
-	
+
 	tar xf $package_name.$package_ext
 	cd $package_name
 }
@@ -26,19 +26,22 @@ finish() {
 
 cd /sources
 
-# 9.2. LFS-Bootscripts-20200818
-begin lfs-bootscripts-20200818 tar.xz
+find /usr/lib /usr/libexec -name \*.la -delete
+find /usr -depth -name $(uname -m)-lfs-linux-gnu\* | xargs rm -rf
+
+# 9.2. LFS-Bootscripts-20210608
+begin lfs-bootscripts-20210608 tar.xz
 make install
 finish
 
 # 9.4.1.2. Creating Custom Udev Rules
-bash /lib/udev/init-net-rules.sh
+bash /usr/lib/udev/init-net-rules.sh
 
 # 9.5.1. Creating Network Interface Configuration Files
 cd /etc/sysconfig/
-cat > ifconfig.enp0s3 << "EOF"
+cat > ifconfig.eth0 << "EOF"
 ONBOOT=yes
-IFACE=enp0s3
+IFACE=eth0
 SERVICE=ipv4-static
 IP=192.168.1.2
 GATEWAY=192.168.1.1
@@ -197,17 +200,17 @@ EOF
 
 cd /sources
 
-# 10.3. Linux-5.8.3
-begin linux-5.8.3 tar.xz
+# 10.3. Linux-5.13.12
+begin linux-5.13.12 tar.xz
 make mrproper
 make defconfig
 make
 make modules_install
-cp -iv arch/x86/boot/bzImage /boot/vmlinuz-5.8.3-lfs-10.0
-cp -iv System.map /boot/System.map-5.8.3
-cp -iv .config /boot/config-5.8.3
-install -d /usr/share/doc/linux-5.8.3
-cp -r Documentation/* /usr/share/doc/linux-5.8.3
+cp -iv arch/x86/boot/bzImage /boot/vmlinuz-5.13.12-lfs-11.0
+cp -iv System.map /boot/System.map-5.13.12
+cp -iv .config /boot/config-5.13.12
+install -d /usr/share/doc/linux-5.13.12
+cp -r Documentation/* /usr/share/doc/linux-5.13.12
 finish
 
 # 10.3.2. Configuring Linux Module Load Order
@@ -227,28 +230,26 @@ cat > /boot/grub/grub.cfg << "EOF"
 # Begin /boot/grub/grub.cfg
 set default=0
 set timeout=5
-
 insmod ext2
 set root=(hd0,1)
-
-menuentry "GNU/Linux, Linux 5.8.3-lfs-10.0" {
-        linux   /boot/vmlinuz-5.8.3-lfs-10.0 root=/dev/sda1 ro
+menuentry "GNU/Linux, Linux 5.13.12-lfs-11.0" {
+        linux   /boot/vmlinuz-5.13.12-lfs-11.0 root=/dev/sda1 ro
 }
 EOF
 
 # 11.1. The End
-echo 10.0 > /etc/lfs-release
+echo 11.0 > /etc/lfs-release
 cat > /etc/lsb-release << "EOF"
 DISTRIB_ID="Linux From Scratch"
-DISTRIB_RELEASE="10.0"
+DISTRIB_RELEASE="11.0"
 DISTRIB_CODENAME="Linux From Scratch"
 DISTRIB_DESCRIPTION="Linux From Scratch"
 EOF
 cat > /etc/os-release << "EOF"
 NAME="Linux From Scratch"
-VERSION="10.0"
+VERSION="11.0"
 ID=lfs
-PRETTY_NAME="Linux From Scratch 10.0"
+PRETTY_NAME="Linux From Scratch 11.0"
 VERSION_CODENAME="Linux From Scratch"
 EOF
 
