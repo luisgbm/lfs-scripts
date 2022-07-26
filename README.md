@@ -51,9 +51,9 @@ Download all the packages and extract them to $LFS/sources.
 
 ```
 cd $LFS
-cp /<location_of_the_package>/lfs-packages-11.0.tar .
-tar xf lfs-packages-11.0.tar
-mv 11.0 sources
+cp /<location_of_the_package>/lfs-packages-11.1.tar .
+tar xf lfs-packages-11.1.tar
+mv 11.1 sources
 chmod -v a+wt $LFS/sources
 ```
 
