@@ -26,8 +26,8 @@ finish() {
 
 cd $LFS/sources
 
-# 5.2. Binutils-2.37 - Pass 1
-begin binutils-2.37 tar.xz
+# 5.2. Binutils-2.38 - Pass 1
+begin binutils-2.38 tar.xz
 mkdir -v build
 cd       build
 ../configure --prefix=$LFS/tools \
