@@ -58,7 +58,7 @@ cd       build
 ../configure                                       \
     --target=$LFS_TGT                              \
     --prefix=$LFS/tools                            \
-    --with-glibc-version=2.11                      \
+    --with-glibc-version=2.35                      \
     --with-sysroot=$LFS                            \
     --with-newlib                                  \
     --without-headers                              \
@@ -91,8 +91,8 @@ rm usr/include/Makefile
 cp -rv usr/include $LFS/usr
 finish
 
-# 5.5. Glibc-2.34
-begin glibc-2.34 tar.xz
+# 5.5. Glibc-2.35
+begin glibc-2.35 tar.xz
 case $(uname -m) in
     i?86)   ln -sfv ld-linux.so.2 $LFS/lib/ld-lsb.so.3
     ;;
@@ -100,7 +100,7 @@ case $(uname -m) in
             ln -sfv ../lib/ld-linux-x86-64.so.2 $LFS/lib64/ld-lsb-x86-64.so.3
     ;;
 esac
-patch -Np1 -i ../glibc-2.34-fhs-1.patch
+patch -Np1 -i ../glibc-2.35-fhs-1.patch
 mkdir -v build
 cd       build
 echo "rootsbindir=/usr/sbin" > configparms
@@ -146,8 +146,8 @@ make
 make DESTDIR=$LFS install
 finish
 
-# 6.3. Ncurses-6.2
-begin ncurses-6.2 tar.gz
+# 6.3. Ncurses-6.3
+begin ncurses-6.3 tar.gz
 sed -i s/mawk// configure
 mkdir build
 pushd build
@@ -170,8 +170,8 @@ make DESTDIR=$LFS TIC_PATH=$(pwd)/build/progs/tic install
 echo "INPUT(-lncursesw)" > $LFS/usr/lib/libncurses.so
 finish
 
-# 6.4. Bash-5.1.8
-begin bash-5.1.8 tar.gz
+# 6.4. Bash-5.1.16
+begin bash-5.1.16 tar.gz
 ./configure --prefix=/usr                   \
             --build=$(support/config.guess) \
             --host=$LFS_TGT                 \
@@ -181,8 +181,8 @@ make DESTDIR=$LFS install
 ln -sv bash $LFS/bin/sh
 finish
 
-# 6.5. Coreutils-8.32
-begin coreutils-8.32 tar.xz
+# 6.5. Coreutils-9.0
+begin coreutils-9.0 tar.xz
 ./configure --prefix=/usr                     \
             --host=$LFS_TGT                   \
             --build=$(build-aux/config.guess) \
@@ -203,8 +203,8 @@ make
 make DESTDIR=$LFS install
 finish
 
-# 6.7. File-5.40
-begin file-5.40 tar.gz
+# 6.7. File-5.41
+begin file-5.41 tar.gz
 mkdir build
 pushd build
   ../configure --disable-bzlib      \
@@ -218,8 +218,8 @@ make FILE_COMPILE=$(pwd)/build/src/file
 make DESTDIR=$LFS install
 finish
 
-# 6.8. Findutils-4.8.0
-begin findutils-4.8.0 tar.xz
+# 6.8. Findutils-4.9.0
+begin findutils-4.9.0 tar.xz
 ./configure --prefix=/usr                   \
             --localstatedir=/var/lib/locate \
             --host=$LFS_TGT                 \
@@ -228,8 +228,8 @@ make
 make DESTDIR=$LFS install
 finish
 
-# 6.9. Gawk-5.1.0
-begin gawk-5.1.0 tar.xz
+# 6.9. Gawk-5.1.1
+begin gawk-5.1.1 tar.xz
 sed -i 's/extras//' Makefile.in
 ./configure --prefix=/usr   \
             --host=$LFS_TGT \
@@ -246,8 +246,8 @@ make
 make DESTDIR=$LFS install
 finish
 
-# 6.11. Gzip-1.10
-begin gzip-1.10 tar.xz
+# 6.11. Gzip-1.11
+begin gzip-1.11 tar.xz
 ./configure --prefix=/usr --host=$LFS_TGT
 make
 make DESTDIR=$LFS install
@@ -300,8 +300,8 @@ make
 make DESTDIR=$LFS install
 finish
 
-# 6.17. Binutils-2.37 - Pass 2
-begin binutils-2.37 tar.xz
+# 6.17. Binutils-2.38 - Pass 2
+begin binutils-2.38 tar.xz
 mkdir -v build
 cd       build
 ../configure                   \
@@ -314,7 +314,7 @@ cd       build
     --enable-64-bit-bfd
 make
 make DESTDIR=$LFS install -j1
-install -vm755 libctf/.libs/libctf.so.0.0.0 $LFS/usr/lib
+#install -vm755 libctf/.libs/libctf.so.0.0.0 $LFS/usr/lib
 finish
 
 # 6.18. GCC-11.2.0 - Pass 2
