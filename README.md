@@ -1,10 +1,6 @@
 # lfs-scripts :penguin:
 Instructions and scripts to build Linux From Scratch (LFS), version 11.0, as simply as possible (I know, not that simple, but anyway).
 
-![Output of uname -a](https://github.com/luisgbm/lfs-scripts/blob/master/img/uname.png?raw=true)
-
-![vim :smile](https://github.com/luisgbm/lfs-scripts/blob/master/img/vim-smile.png?raw=true)
-
 # Foreword
 
 First, this guide does not replace reading the whole LFS book. I highly recommend that you read it at least once. Only then you should use the automated scripts provided here.
