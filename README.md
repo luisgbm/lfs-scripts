@@ -1,5 +1,5 @@
 # lfs-scripts :penguin:
-Instructions and scripts to build Linux From Scratch (LFS), version 11.0, as simply as possible (I know, not that simple, but anyway).
+Instructions and scripts to build Linux From Scratch (LFS), version 11.2, as simply as possible (I know, not that simple, but anyway).
 
 ![Output of uname -a](https://github.com/luisgbm/lfs-scripts/blob/master/img/uname.png?raw=true)
 
@@ -13,7 +13,7 @@ This build will be accomplished inside a virtual machine. I'll be using Oracle V
 
 My VM has two virtual hard disks: one for the host (Arch Linux itself) and another for building LFS. You could also use a single hard disk with two partitions, that's also up to personal taste. I've decided to use two separate hard disks so I can completely isolate LFS from the host after the build. At the end, you'll be able to create a separate VM and boot from it directly.
 
-The packages needed to build LFS were downloaded from [here](http://ftp.osuosl.org/pub/lfs/lfs-packages/lfs-packages-11.0.tar) (443 MB), other mirrors are available [here](http://linuxfromscratch.org/lfs/download.html) (look for the "LFS HTTP/FTP Sites" section at the bottom, the file you need is lfs-packages-11.0.tar).
+The packages needed to build LFS were downloaded from [here](http://ftp.osuosl.org/pub/lfs/lfs-packages/lfs-packages-11.2.tar) (474 MB), other mirrors are available [here](http://linuxfromscratch.org/lfs/download.html) (look for the "LFS HTTP/FTP Sites" section at the bottom, the file you need is lfs-packages-11.0.tar).
 
 # Build instructions
 
@@ -51,9 +51,9 @@ Download all the packages and extract them to $LFS/sources.
 
 ```
 cd $LFS
-cp /<location_of_the_package>/lfs-packages-11.0.tar .
-tar xf lfs-packages-11.0.tar
-mv 11.0 sources
+cp /<location_of_the_package>/lfs-packages-11.2.tar .
+tar xf lfs-packages-11.2.tar
+mv 11.2-rc1 sources
 chmod -v a+wt $LFS/sources
 ```
 
@@ -154,8 +154,6 @@ Prepare virtual kernel file systems:
 
 ```
 mkdir -pv $LFS/{dev,proc,sys,run}
-mknod -m 600 $LFS/dev/console c 5 1
-mknod -m 666 $LFS/dev/null c 1 3
 mount -v --bind /dev $LFS/dev
 mount -v --bind /dev/pts $LFS/dev/pts
 mount -vt proc proc $LFS/proc
@@ -174,7 +172,7 @@ chroot "$LFS" /usr/bin/env -i   \
     TERM="$TERM"                \
     PS1='(lfs chroot) \u:\w\$ ' \
     PATH=/usr/bin:/usr/sbin     \
-    /bin/bash --login +h
+    /bin/bash --login
 ```
 
 Create essential directories, files and symlinks:
@@ -191,13 +189,10 @@ mkdir -pv /usr/{,local/}share/{misc,terminfo,zoneinfo}
 mkdir -pv /usr/{,local/}share/man/man{1..8}
 mkdir -pv /var/{cache,local,log,mail,opt,spool}
 mkdir -pv /var/lib/{color,misc,locate}
-
 ln -sfv /run /var/run
 ln -sfv /run/lock /var/lock
-
 install -dv -m 0750 /root
 install -dv -m 1777 /tmp /var/tmp
-
 ln -sv /proc/self/mounts /etc/mtab
 
 cat > /etc/hosts << EOF
@@ -207,11 +202,11 @@ EOF
 
 cat > /etc/passwd << "EOF"
 root:x:0:0:root:/root:/bin/bash
-bin:x:1:1:bin:/dev/null:/bin/false
-daemon:x:6:6:Daemon User:/dev/null:/bin/false
-messagebus:x:18:18:D-Bus Message Daemon User:/run/dbus:/bin/false
-uuidd:x:80:80:UUID Generation Daemon User:/dev/null:/bin/false
-nobody:x:99:99:Unprivileged User:/dev/null:/bin/false
+bin:x:1:1:bin:/dev/null:/usr/bin/false
+daemon:x:6:6:Daemon User:/dev/null:/usr/bin/false
+messagebus:x:18:18:D-Bus Message Daemon User:/run/dbus:/usr/bin/false
+uuidd:x:80:80:UUID Generation Daemon User:/dev/null:/usr/bin/false
+nobody:x:65534:65534:Unprivileged User:/dev/null:/usr/bin/false
 EOF
 
 cat > /etc/group << "EOF"
@@ -238,16 +233,19 @@ mail:x:34:
 kvm:x:61:
 uuidd:x:80:
 wheel:x:97:
-nogroup:x:99:
 users:x:999:
+nogroup:x:65534:
 EOF
 
+echo "tester:x:101:101::/home/tester:/bin/bash" >> /etc/passwd
+echo "tester:x:101:" >> /etc/group
+install -o tester -d /home/tester
 touch /var/log/{btmp,lastlog,faillog,wtmp}
 chgrp -v utmp /var/log/lastlog
 chmod -v 664  /var/log/lastlog
 chmod -v 600  /var/log/btmp
 
-exec /bin/bash --login +h
+exec /usr/bin/bash --login
 ```
 
 Run the lfs-chroot.sh script, which will build additional temporary tools:
@@ -274,18 +272,6 @@ You must now set a password for the root user (you will have to type a password)
 
 ```
 passwd root
-```
-
-Logout from the chroot environment and re-enter it with updated configuration:
-
-```
-logout
-
-chroot "$LFS" /usr/bin/env -i          \
-    HOME=/root TERM="$TERM"            \
-    PS1='(lfs chroot) \u:\w\$ '        \
-    PATH=/usr/bin:/usr/sbin            \
-    /bin/bash --login
 ```
 
 Run the final script to configure the rest of the system:
