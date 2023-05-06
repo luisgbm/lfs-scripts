@@ -7,7 +7,7 @@ Instructions and scripts to build Linux From Scratch (LFS), version 11.2, as sim
 
 # Foreword
 
-First, this guide does not replace reading the whole LFS book. I highly recommend that you read it at least once. Only then you should use the automated scripts provided here.
+First, this guide does not replace reading the whole LFS book. I highly recommend that you read it at least once. Only then you should use the automated scripts provided here. Linux From Scratch (LFS) Book, version 11.2, can be download from [here](https://www.linuxfromscratch.org/lfs/downloads/11.2/).
 
 This build will be accomplished inside a virtual machine. I'll be using Oracle VirtualBox, but you can use any tool of your personal preference. I'm running an Arch Linux VM, feel free to use your GNU/Linux distribution of choice. Just be sure to install the development tools available (base-devel package on Arch).
 
